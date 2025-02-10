@@ -3,7 +3,7 @@
 
 ## React-Query Task Manager - React Fundamental Project 15
 
-This project is a task management application built with React and React Query. It allows users to create, edit, and delete tasks, with data fetching and state management handled by React Query.
+This project is a task management application built with React and React Query. It allows users to create, edit, and delete tasks, with data fetching and state management handled by React Query using server-side-rendering.
 
 **Online Live:** https://react-query-task-manager-arnob.netlify.app/
 
