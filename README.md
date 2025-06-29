@@ -1,13 +1,80 @@
+# React-Query Task Manager - React Fundamental Project 15
 
-<img width="534" alt="Screenshot 2025-02-10 at 15 28 34" src="https://github.com/user-attachments/assets/950d6478-534a-4d4a-8b76-3480a11df744" />
+---
 
-## React-Query Task Manager - React Fundamental Project 15
+<img width="534" alt="Screenshot" src="https://github.com/user-attachments/assets/950d6478-534a-4d4a-8b76-3480a11df744" />
 
-This project is a task management application built with React and React Query. It allows users to create, edit, and delete tasks, with data fetching and state management handled by React Query using server-side-rendering.
+---
 
-**Online Live:** https://react-query-task-manager-arnob.netlify.app/
+## Project Summary
 
-**Backend-End/Server Source Code:** https://github.com/arnobt78/Task-Management-Server--React-Fundamental-Project-15
+React-Query Task Manager is a CRUD task management application built with React and React Query. It demonstrates best practices in modern React development, including state and data management using React Query, custom hooks, API interaction with Axios, and modular component-based design. The project is an excellent resource for learners seeking to understand React fundamentals, advanced data fetching, and how to structure scalable front-end applications.
+
+- **Live-Demo:** [https://react-query-task-manager-arnob.netlify.app/](https://react-query-task-manager-arnob.netlify.app/)
+- **Backend Source Code:** [Task Management Server (GitHub)](https://github.com/arnobt78/Task-Management-Server--React-Fundamental-Project-15)
+
+---
+
+## Table of Contents
+
+1. [Project Summary](#project-summary)
+2. [Live Demo & Backend](#live-demo--backend)
+3. [Features](#features)
+4. [Technology Stack](#technology-stack)
+5. [Project Structure](#project-structure)
+6. [Getting Started](#getting-started)
+7. [API Endpoints](#api-endpoints)
+8. [Custom React Query Hooks](#custom-react-query-hooks)
+9. [Core Components Walkthrough](#core-components-walkthrough)
+10. [Detailed Functionality](#detailed-functionality)
+11. [Learning Points](#learning-points)
+12. [HTTP Methods & CRUD Operations](#http-methods--crud-operations)
+13. [Examples](#examples)
+14. [Project Resources](#project-resources)
+15. [Conclusion](#conclusion)
+
+---
+
+## Features
+
+- View, create, edit, and delete tasks
+- Responsive, modern UI
+- Real-time updates and cache management with React Query
+- Modular React components for separation of concerns
+- Error handling and loading states
+- Custom hooks for API interaction and data fetching
+- Usage of Axios for HTTP requests
+- Educational code comments and best practices
+
+---
+
+## Technology Stack
+
+- **Frontend:** React, React Query, Axios, JavaScript (ES6+), CSS
+- **Backend:** Node.js/Express (see backend repo)
+- **Other:** Vite (React build tool), npm
+
+---
+
+## Project Structure
+
+```
+react-query-task-manager/
+├── public/
+│   └── ...
+├── src/
+│   ├── App.jsx                # Main application component
+│   ├── Form.jsx               # Component for adding new tasks
+│   ├── Items.jsx              # Displays the list of tasks
+│   ├── SingleItem.jsx         # Displays a single task
+│   ├── reactQueryCustomHooks.jsx # Custom hooks for React Query (data fetching & mutations)
+│   ├── utils.js               # Axios instance for API requests
+│   ├── index.css              # Global CSS styles
+│   └── main.jsx               # Entry point, sets up React Query provider
+├── package.json
+└── README.md
+```
+---
 
 ## Getting Started
 
@@ -15,284 +82,165 @@ This project is a task management application built with React and React Query. 
 
 - Node.js and npm installed on your machine.
 
+---
+
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```sh
    git clone <repository-url>
    ```
-2. Navigate to the project directory:
+2. **Navigate to the project directory:**
    ```sh
    cd react-query-task-manager
    ```
-3. Install the dependencies:
+3. **Install dependencies:**
    ```sh
    npm install
    ```
 
+---
+
 ### Running the Application
 
-1. Start the development server:
+1. **Start the development server:**
    ```sh
    npm run dev
    ```
-2. Open your browser and navigate to `http://localhost:3000`.
+2. **Open your browser and navigate to:** `http://localhost:3000`
 
-## Project Structure
-
-- src
-  - App.jsx: Main application component.
-  - Form.jsx: Component for adding new tasks.
-  - Items.jsx: Component for displaying the list of tasks.
-  - SingleItem.jsx: Component for displaying a single task.
-  - reactQueryCustomHooks.jsx: Custom hooks for data fetching and mutations using React Query.
-  - utils.js: Custom Axios instance for API requests.
-  - index.css: Global CSS styles.
-  - main.jsx: Entry point of the application.
+---
 
 ## API Endpoints
 
-The application interacts with a backend server to perform CRUD operations on tasks. The base URL for the API is `http://localhost:5000/api/tasks`.
+The application interacts with a backend server to perform CRUD operations on tasks.
 
-- `GET /`: Fetch all tasks.
-- `POST /`: Create a new task.
-- `PATCH /:taskId`: Update a task.
-- `DELETE /:taskId`: Delete a task.
+**Base URL:** `http://localhost:5000/api/tasks`
 
-## Custom Hooks
+| Method   | Endpoint         | Description         |
+|----------|------------------|---------------------|
+| GET      | `/`              | Fetch all tasks     |
+| POST     | `/`              | Create a new task   |
+| PATCH    | `/:taskId`       | Update a task       |
+| DELETE   | `/:taskId`       | Delete a task       |
+
+For full API documentation, see: [Task API Docs](https://documenter.getpostman.com/view/18152321/2s93RTSDLn)
+
+---
+
+## Custom React Query Hooks
+
+Custom hooks encapsulate logic for each CRUD operation using React Query:
 
 - `useFetchTasks`: Fetches the list of tasks.
 - `useCreateTask`: Creates a new task.
 - `useEditTask`: Edits an existing task.
 - `useDeleteTask`: Deletes a task.
 
-## Additional Resources
+Example usage:
+```js
+const { data, isLoading, error } = useFetchTasks();
+const { mutate: createTask } = useCreateTask();
+```
+
+---
+
+## Core Components Walkthrough
+
+- **App.jsx**: Main component, renders the form and task list.
+- **Form.jsx**: Input form for creating a new task; uses `useCreateTask` hook.
+- **Items.jsx**: Fetches and displays all tasks using `useFetchTasks`.
+- **SingleItem.jsx**: Displays an individual task, with edit and delete functionality.
+- **reactQueryCustomHooks.jsx**: Contains all custom hooks for React Query integration.
+- **utils.js**: Exports a custom Axios instance with the API base URL.
+
+---
+
+## Detailed Functionality
+
+- **Task Fetching**: On app load, tasks are fetched using React Query and displayed in `Items.jsx`.
+- **Create Task**: Submitting the form triggers a POST request; React Query automatically updates the UI.
+- **Edit Task**: Inline editing on a task sends a PATCH request; cache is updated for real-time UI feedback.
+- **Delete Task**: Clicking delete removes a task from the server and updates the UI immediately.
+- **State Management**: No Redux; state is managed via React Query and React’s local state when needed.
+- **Error and Loading Handling**: UI displays loading spinners and error messages with React Query state.
+
+---
+
+## Learning Points
+
+- **React Query**: Simplifies data fetching, caching, and updating UI. Learn to use `useQuery` and `useMutation`.
+- **Custom Hooks**: Encapsulate API logic for reusable, maintainable code.
+- **Axios**: Consistent HTTP requests and error handling.
+- **Component Design**: Separation of concerns for scalability.
+- **API Integration**: Real-world CRUD operations with a RESTful backend.
+
+---
+
+## HTTP Methods & CRUD Operations
+
+- **GET**: Retrieve data from the server.
+- **POST**: Send data to create resources.
+- **PATCH**: Update parts of a resource.
+- **DELETE**: Remove resources.
+
+Example (GET using Axios):
+```js
+try {
+  const response = await axios.get("/api/tasks");
+  console.log(response.data);
+} catch (error) {
+  console.error(error);
+}
+```
+---
+
+## Examples
+
+### POST (Create Task)
+```js
+try {
+  const response = await axios.post("/api/tasks", { title: "New Task" });
+  console.log(response.data);
+} catch (error) {
+  console.error(error);
+}
+```
+
+### PATCH (Edit Task)
+```js
+try {
+  const response = await axios.patch("/api/tasks/1", { completed: true });
+  console.log(response.data);
+} catch (error) {
+  console.error(error);
+}
+```
+
+### DELETE (Delete Task)
+```js
+try {
+  const response = await axios.delete("/api/tasks/1");
+  console.log(response.data);
+} catch (error) {
+  console.error(error);
+}
+```
+
+---
+
+## Project Resources
 
 - [React Query Documentation](https://tanstack.com/query/v4/docs/react/overview)
 - [Axios Documentation](https://axios-http.com/docs/intro)
+- [Backend Source Code](https://github.com/arnobt78/Task-Management-Server--React-Fundamental-Project-15)
+- [Task API Docs - Postman](https://documenter.getpostman.com/view/18152321/2s93RTSDLn)
+- [Node Tutorial and Projects Course](https://www.udemy.com/course/nodejs-tutorial-and-projects-course/?referralCode=E94792BEAE9ADD204BC7)
 
-## Project Details and Steps
+---
 
-### Server
+## Conclusion
 
-Open server directory.
+This React-Query Task Manager serves as a practical learning project for mastering React, React Query, and modern web application development practices. It demonstrates how to build a scalable, maintainable app with efficient state and server data management, real-world API interaction, and clean component-based design. Use this project to practice, extend, or teach others about professional React development!
 
-- run "npm install" and "npm start"
-
-### Node Course
-
-[Node Tutorial and Projects Course](https://www.udemy.com/course/nodejs-tutorial-and-projects-course/?referralCode=E94792BEAE9ADD204BC7)
-
-### Custom Axios Instance
-
-Create utils.js and setup custom axios instance with
-following base url:'http://localhost:5000/api/tasks'
-
-### HTTP Methods
-
-HTTP (Hypertext Transfer Protocol) methods define the types of actions that can be performed on a web server to retrieve, modify or delete information. The most commonly used HTTP methods are GET, POST, PATCH and DELETE. GET retrieves data, POST sends data to be processed, PATCH update or replace existing data, DELETE removes data.
-
-- can use fetch()
-
-GET: This HTTP method is used to retrieve data from a server. When a client sends a GET request to a server, the server will return a response that includes the requested data. This method is typically used to retrieve information from a database, to read a web page, or to download a file. The HTTP GET method is the default method used by web browsers to retrieve data from a server, as it is a safe and efficient way to request resources.
-
-```js
-// HTTP GET example
-try {
-  const response = await axios.get("/api/data");
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-```
-
-```js
-// HTTP GET example
-axios
-  .get("/api/data")
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-```
-
-POST: The POST method is used to send data to a server to create or update a resource. When a client sends a POST request to a server, the server will process the request and create a new resource or update an existing one. This method is commonly used in web forms, where users enter information that is then sent to a server for processing.
-
-```js
-// HTTP POST example
-try {
-  const response = await axios.post("/api/data", { name: "John", age: 30 });
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-```
-
-PATCH: This method is similar to the POST method, but it is used to update only a part of a resource. When a client sends a PATCH request to a server, the server will update the resource with the new data provided in the request. This method is commonly used in REST APIs to update specific properties of a resource.
-
-```js
-// HTTP PATCH example
-try {
-  const response = await axios.patch("/api/data/1", { age: 31 });
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-```
-
-DELETE: The DELETE method is used to remove a resource from a server. When a client sends a DELETE request to a server, the server will delete the resource if it exists. This method is commonly used in REST APIs to remove a resource that is no longer needed or to undo a previous action.
-
-```js
-// HTTP DELETE example
-try {
-  const response = await axios.delete("/api/data/1");
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
-```
-
-CRUD stands for Create, Read, Update, and Delete, which are the basic operations that can be performed on a database or web application. These operations allow users to create new data, read existing data, update data, and delete data when necessary.
-
-### Docs
-
-[Task API Docs](https://documenter.getpostman.com/view/18152321/2s93RTSDLn)
-
-### UseEffect Approach
-
-```js
-const fetchTasks = async () => {
-  try {
-    const response = await customFetch.get("/");
-    console.log(response.data);
-  } catch (error) {
-    +console.error(error);
-  }
-};
-
-useEffect(() => {
-  fetchTasks();
-}, []);
-```
-
-### React Query
-
-React Query is a state management library that simplifies the process of fetching, caching, and updating data in React applications. Its major benefits include automatic background refetching, caching and stale data management, error handling, and easy pagination and infinite scrolling. Compared to setting up requests with useEffect, React Query provides a more declarative and centralized approach to managing data in React, which results in cleaner and more efficient code. It also reduces boilerplate code and improves performance by minimizing unnecessary re-renders and network requests.
-
-- tons of features
-- versions
-
-[React Query](https://tanstack.com/query/v4/docs/react/overview)
-
-### Install
-
-```sh
-npm i @tanstack/react-query
-```
-
-### Setup React Query
-
-main.jsx
-
-```js
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-const queryClient = new QueryClient();
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>
-);
-```
-
-### First Query
-
-Items.jsx
-
-```js
-import { useQuery } from "@tanstack/react-query";
-
-const result = useQuery({
-  queryKey: ["tasks"],
-  queryFn: () => customFetch.get("/"),
-});
-console.log(result);
-```
-
-- Query Key
-
-The unique key you provide is used internally for refetching, caching, and sharing your queries throughout your application.
-
-- Query Function
-
-A query function can be literally any function that returns a promise. The promise that is returned should either resolve the data or throw an error.
-
-### Error Handling
-
-```js
-const Items = () => {
-  const { isLoading, data, error, isError } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: async () => {
-      const { data } = await customFetch.get("/something");
-      return data;
-    },
-  });
-
-  if (isLoading) {
-    return <p style={{ marginTop: "1rem " }}>Loading...</p>;
-  }
-
-  // if (isError) {
-  //   return <p style={{ marginTop: '1rem ' }}>there was an error...</p>;
-  // }
-  if (error) {
-    return <p style={{ marginTop: "1rem " }}>{error.message}</p>;
-  }
-  return (
-    <div className="items">
-      {data.taskList.map((item) => {
-        return <SingleItem key={item.id} item={item} />;
-      })}
-    </div>
-  );
-};
-export default Items;
-```
-
-### Thunder Client Extension
-
-Test API endpoints directly in VS CODE
-
-### Create Task
-
-Form.jsx
-
-```js
-const { mutate: createTask, isLoading } = useMutation({
-  mutationFn: (taskTitle) => customFetch.post("/", { title: taskTitle }),
-});
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  createTask(newItemName);
-};
-```
-
-### useMutation Helper Options
-
-useMutation comes with some helper options that allow quick and easy side-effects at any stage during the mutation lifecycle. These come in handy for both invalidating and refetching queries after mutations
-
-```js
-const { mutate: createTask, isLoading } = useMutation({
-  mutationFn: (taskTitle) => customFetch.post("/", { title: taskTitle }),
-  onSuccess: () => {
-    // do something
-  },
-  onError: () => {
-    // do something
-  },
-});
-```
+---
